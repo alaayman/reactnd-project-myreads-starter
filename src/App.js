@@ -33,25 +33,7 @@ class BooksApp extends React.Component {
           <SearchBooks setShowSearchPage={this.removeSearchPage} />
         ) : (
           <>
-            <ListBooks />
-
-            <ol>
-              {this.state.books.map((book) => (
-                <li key={book.id}>
-                  <h2>{book.shelf}</h2>
-                  <div
-                    className="book-cover"
-                    style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: `url(${book.imageLinks.thumbnail}`,
-                    }}
-                  />
-                  {book.title}
-                  <p>{book.description}</p>
-                </li>
-              ))}
-            </ol>
+            <ListBooks books={this.state.books} />
 
             <div className="open-search">
               <button onClick={() => this.setState({ showSearchPage: true })}>
