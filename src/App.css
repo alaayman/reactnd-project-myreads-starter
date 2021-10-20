@@ -47,6 +47,7 @@ body,
   /* border-bottom: 1px solid #dedede; */
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
   background-color: rgb(193, 218, 181);
+  color: rgb(15, 91, 18);
   text-align: center;
   padding: 5px 0;
 }

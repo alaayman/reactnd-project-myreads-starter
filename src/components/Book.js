@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 
 export default class Book extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = this.props.book.shelf;
+  // }
+
+  handleShelfChange = (e) => {
+    // let changedBook = this.state.book;
+    // changedBook.shelf = e.target.value;
+    this.props.changeShelf(this.props.book, e.target.value);
+  };
+
   render() {
     const { book } = this.props;
     return (
@@ -15,7 +26,7 @@ export default class Book extends Component {
             }}
           />
           <div className="book-shelf-changer">
-            <select>
+            <select value={book.shelf} onChange={this.handleShelfChange}>
               <option value="move" disabled>
                 Move to...
               </option>
@@ -29,7 +40,7 @@ export default class Book extends Component {
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
           {book.authors.map((author) => (
-            <p>{author}</p>
+            <p key={author}>{author}</p>
           ))}
         </div>
       </div> // ToDo

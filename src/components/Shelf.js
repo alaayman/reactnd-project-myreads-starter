@@ -3,7 +3,7 @@ import Book from "./Book";
 
 export default class Shelf extends Component {
   render() {
-    const { books, shelf } = this.props;
+    const { books, shelf, changeShelf } = this.props;
 
     return (
       <div>
@@ -14,8 +14,8 @@ export default class Shelf extends Component {
               {books
                 .filter((book) => book.shelf === shelf.id)
                 .map((book) => (
-                  <li>
-                    <Book book={book} />
+                  <li key={book.id}>
+                    <Book book={book} changeShelf={changeShelf} />
                   </li>
                 ))}
             </ol>
