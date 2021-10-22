@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 
 export default class Book extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = this.props.book.shelf;
-  // }
+  state = {
+    book: this.props.book,
+  };
 
   handleShelfChange = (e) => {
-    // let changedBook = this.state.book;
-    // changedBook.shelf = e.target.value;
-    this.props.changeShelf(this.props.book, e.target.value);
+    let changedBook = this.state.book;
+    changedBook.shelf = e.target.value;
+    this.setState({
+      book: changedBook,
+    });
+    this.props.changeShelf(this.state.book, e.target.value);
   };
 
   render() {
-    const { book } = this.props;
+    const { book } = this.state;
     return (
       <div className="book">
         <div className="book-top">
@@ -22,11 +24,17 @@ export default class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail}`,
+              backgroundImage:
+                book.imageLinks === null || book.imageLinks === undefined
+                  ? ""
+                  : `url(${book.imageLinks.thumbnail}`,
             }}
           />
           <div className="book-shelf-changer">
-            <select value={book.shelf} onChange={this.handleShelfChange}>
+            <select
+              value={book.shelf ? book.shelf : "none"}
+              onChange={this.handleShelfChange}
+            >
               <option value="move" disabled>
                 Move to...
               </option>
@@ -39,11 +47,13 @@ export default class Book extends Component {
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
-          {book.authors.map((author) => (
-            <p key={author}>{author}</p>
-          ))}
+          {book.authors ? (
+            book.authors.map((author) => <p key={author}>{author}</p>)
+          ) : (
+            <p />
+          )}
         </div>
-      </div> // ToDo
+      </div>
     );
   }
 }
