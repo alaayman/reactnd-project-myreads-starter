@@ -1,40 +1,66 @@
 import React, { Component } from "react";
 import * as BooksAPI from "../BooksAPI";
 import Book from "./Book";
+import { Link } from "react-router-dom";
 
 export default class SearchBooks extends Component {
-  state = {
-    query: "",
-    books: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: "",
+      books: [],
+    };
+  }
 
   changeQuery = (query) => {
-    if (query !== null) {
-      this.setState({ query: query.trim() });
-      this.getBookList(query);
-    } else this.setState({ books: [] });
+    this.setState({ query: query });
+
+    BooksAPI.search(query)
+      .then((apiBooks) => {
+        if (!query || apiBooks.error) {
+          this.setState({ books: [] });
+        } else {
+          // this.setState({ books: apiBooks });
+          this.syncBooks(this.props.myBooks, apiBooks);
+        }
+      })
+      .catch((error) => {
+        console.log(error); // did'nt work !!!!
+        this.setState({ books: [] });
+      });
   };
 
-  getBookList = (query) => {
-    console.log(query);
-    BooksAPI.search(query).then((apiBooks) => {
-      this.setState({ books: apiBooks });
+  changeSearchShelf = (changedBook) => {
+    let newList = [];
+    this.state.books.filter((book) => book.id === changedBook.id).length
+      ? (newList = this.state.books.map((book) =>
+          book.id === changedBook.id ? changedBook : book
+        ))
+      : (newList = [...this.state.books, changedBook]);
+    this.setState({
+      books: newList,
     });
   };
 
+  syncBooks = (myBooks, apiBooks) => {
+    console.log("api", apiBooks);
+    let newBooks = [];
+    newBooks = apiBooks.map((apiBook) =>
+      myBooks.find((myBook) => apiBook.id === myBook.id)
+        ? myBooks.find((myBook) => apiBook.id === myBook.id)
+        : apiBook
+    );
+    this.setState({ books: newBooks });
+  };
+
   render() {
-    const { setShowSearchPage } = this.props;
-    console.log(this.state.books);
     return (
       <div>
         <div className="search-books">
           <div className="search-books-bar">
-            <button
-              className="close-search"
-              onClick={() => setShowSearchPage(false)}
-            >
-              Close
-            </button>
+            <Link to="/">
+              <button className="close-search">Close</button>
+            </Link>
             <div className="search-books-input-wrapper">
               <input
                 value={this.state.query}
@@ -49,11 +75,15 @@ export default class SearchBooks extends Component {
               {this.state.books.length ? (
                 this.state.books.map((book) => (
                   <li key={book.id}>
-                    <Book book={book} changeShelf={this.props.changeShelf} />
+                    <Book
+                      book={book}
+                      changeShelf={this.props.changeShelf}
+                      changSearchShelf={this.changeSearchShelf}
+                    />
                   </li>
                 ))
               ) : (
-                <h3>no books found</h3>
+                <h4>no books found</h4>
               )}
             </ol>
           </div>

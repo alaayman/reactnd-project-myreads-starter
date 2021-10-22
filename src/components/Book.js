@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 
 export default class Book extends Component {
-  state = {
-    book: this.props.book,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      book: this.props.book,
+    };
+  }
 
   handleShelfChange = (e) => {
+    // console.log("started change in book");
     let changedBook = this.state.book;
     changedBook.shelf = e.target.value;
     this.setState({
       book: changedBook,
     });
     this.props.changeShelf(this.state.book, e.target.value);
+    // console.log("after calling app from book change shelf");
+    this.props.changeSearchShelf(this.state.book);
   };
 
   render() {
-    const { book } = this.state;
+    const { book } = this.props;
     return (
       <div className="book">
         <div className="book-top">
@@ -50,7 +56,7 @@ export default class Book extends Component {
           {book.authors ? (
             book.authors.map((author) => <p key={author}>{author}</p>)
           ) : (
-            <p />
+            <p>no authors listed</p>
           )}
         </div>
       </div>

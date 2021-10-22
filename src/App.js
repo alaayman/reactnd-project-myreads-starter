@@ -1,19 +1,13 @@
 import React from "react";
+import { Link, Route } from "react-router-dom";
+import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 import SearchBooks from "./components/SearchBooks";
 import ListBooks from "./components/ListBooks";
-import * as BooksAPI from "./BooksAPI";
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: [],
-    showSearchPage: false,
   };
 
   componentDidMount() {
@@ -24,44 +18,49 @@ class BooksApp extends React.Component {
 
   changeBookShelf = (changedBook, shelf) => {
     let newList = [];
-
+    console.log("start app change shelf");
     this.state.books.filter((book) => book.id === changedBook.id).length
       ? (newList = this.state.books.map((book) =>
           book.id === changedBook.id ? changedBook : book
         ))
       : (newList = [...this.state.books, changedBook]);
 
+    console.log("new", newList);
     this.setState({
       books: newList,
     });
-
     BooksAPI.update(changedBook, shelf);
   };
-
-  removeSearchPage = (show) => this.setState({ showSearchPage: show });
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks
-            setShowSearchPage={this.removeSearchPage}
-            changeShelf={this.changeBookShelf}
-          />
-        ) : (
-          <>
-            <ListBooks
-              books={this.state.books}
+        <Route
+          path="/search"
+          render={() => (
+            <SearchBooks
+              myBooks={this.state.books}
               changeShelf={this.changeBookShelf}
             />
-
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </button>
+          )}
+        />
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <div>
+              <ListBooks
+                books={this.state.books}
+                changeShelf={this.changeBookShelf}
+              />
+              <div className="open-search">
+                <Link to="/search">
+                  <button type="button">Add a book </button>
+                </Link>
+              </div>
             </div>
-          </>
-        )}
+          )}
+        />
       </div>
     );
   }
