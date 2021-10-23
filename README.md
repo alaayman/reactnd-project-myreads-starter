@@ -111,10 +111,9 @@ I used guidance and ideas from :
 * <https://reactjs.org/>
 * and many explanition to common js and array problems from <https://stackoverflow.com>
 
-* Special mention for **(Full React Course 2020 - Learn Fundamentals, Hooks, Context API, React Router, Custom Hooks)** by **freeCodeCamp.org** at youtube for a very good course on react.js
+* Special mention for **(Full React Course 2020 - Learn Fundamentals, Hooks, Context API, React Router, Custom Hooks)** by **freeCodeCamp.org** at youtube for a very good and long course on react.js
 Watch it here <https://www.youtube.com/watch?v=4UZrsTqkcW4&t=14679s>
-* Special mention for **(React JS - React Tutorial for Beginners)** by **Programming with Mosh
-** at youtube for a very good course on react.js
+* Special mention for **(React JS - React Tutorial for Beginners)** by **Programming with Mosh** at youtube for a very good course on react.js
 Watch it here <https://www.youtube.com/watch?v=Ke90Tje7VS0&t=4602s>
 
 Thank you all for helping :smile:
