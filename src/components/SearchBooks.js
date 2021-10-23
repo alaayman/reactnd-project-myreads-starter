@@ -45,7 +45,7 @@ export default class SearchBooks extends Component {
 
   // Called whenever the search query change to sync books from App with search results
   syncBooks = (myBooks, apiBooks) => {
-    console.log("api", apiBooks);
+    // console.log("api", apiBooks);
     let newBooks = [];
     newBooks = apiBooks.map((apiBook) =>
       myBooks.find((myBook) => apiBook.id === myBook.id)

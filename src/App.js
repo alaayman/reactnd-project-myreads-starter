@@ -29,7 +29,7 @@ class BooksApp extends React.Component {
         ))
       : (newList = [...this.state.books, changedBook]);
 
-    console.log("new", newList);
+    // console.log("new", newList);
     this.setState({
       books: newList,
     });
@@ -40,7 +40,6 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route
-          exact
           path="/search"
           render={() => (
             <SearchBooks

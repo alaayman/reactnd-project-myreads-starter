@@ -18,7 +18,7 @@ export default class Book extends Component {
     });
     this.props.changeShelf(this.state.book, e.target.value);
     // console.log("after calling app from book change shelf");
-    this.props.changeSearchShelf(this.state.book);
+    // this.props.changSearchShelf(this.state.book);
   };
 
   render() {

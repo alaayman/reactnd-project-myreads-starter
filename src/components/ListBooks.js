@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Shelf from "./Shelf";
 
-// Holds the shelfs state and populate the view with shelf
+// Holds the shelfs state and populate the view with shelfs
 export default class ListBooks extends Component {
   state = {
     shelfs: [
