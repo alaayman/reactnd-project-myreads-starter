@@ -29,7 +29,19 @@ export default class SearchBooks extends Component {
       });
   };
 
-  // --------------------- No longer nedeed VERY BUGGY ---------------//
+  // Called whenever the search query change to sync books from App with search results
+  syncBooks = (myBooks, apiBooks) => {
+    // console.log("api", apiBooks);
+    let newBooks = [];
+    newBooks = apiBooks.map((apiBook) =>
+      myBooks.find((myBook) => apiBook.id === myBook.id)
+        ? myBooks.find((myBook) => apiBook.id === myBook.id)
+        : apiBook
+    );
+    this.setState({ books: newBooks });
+  };
+
+  // --------------------- No longer needed VERY BUGGY ---------------//
   // // Tried to do it with props from App.js but didn't work
   // // so used same logic from App changeBookShelf
   // changeSearchShelf = (changedBook) => {
@@ -43,18 +55,6 @@ export default class SearchBooks extends Component {
   //     books: newList,
   //   });
   // };
-
-  // Called whenever the search query change to sync books from App with search results
-  syncBooks = (myBooks, apiBooks) => {
-    // console.log("api", apiBooks);
-    let newBooks = [];
-    newBooks = apiBooks.map((apiBook) =>
-      myBooks.find((myBook) => apiBook.id === myBook.id)
-        ? myBooks.find((myBook) => apiBook.id === myBook.id)
-        : apiBook
-    );
-    this.setState({ books: newBooks });
-  };
 
   render() {
     return (
