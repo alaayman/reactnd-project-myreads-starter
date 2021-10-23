@@ -35,6 +35,17 @@ To get started developing right away:
 
 Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
 
+## Files Added
+```bash
+└── src
+    └── components
+       ├── Book.js # This component represent a Book instance.
+       ├── ListBooks.js # This component represent the container to shelfs and populate them.
+       ├── SearchBooks.js # Used for searching for Books and adding them to shelfs.
+       └── Shelf.js # This component represent a shelf that is populated with Books using Filter 
+       
+```
+
 ## Backend Server
 
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
@@ -90,3 +101,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Credits
+
+I used guidance and ideas from :
+* <https://udacity.com/>
+* <https://developer.mozilla.org/>
+* <https://www.w3schools.com/>
+* <https://reactjs.org/>
+* and many explanition to common js and array problems from <https://stackoverflow.com>
+
+* Special mention for **(Full React Course 2020 - Learn Fundamentals, Hooks, Context API, React Router, Custom Hooks)** by **freeCodeCamp.org** at youtube for a very good course on react.js
+Watch it here <https://www.youtube.com/watch?v=4UZrsTqkcW4&t=14679s>
+* Special mention for **(React JS - React Tutorial for Beginners)** by **Programming with Mosh
+** at youtube for a very good course on react.js
+Watch it here <https://www.youtube.com/watch?v=Ke90Tje7VS0&t=4602s>
+
+Thank you all for helping :smile:
+
