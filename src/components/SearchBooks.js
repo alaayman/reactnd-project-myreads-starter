@@ -29,19 +29,20 @@ export default class SearchBooks extends Component {
       });
   };
 
-  // Tried to do it with props from App.js but didn't work
-  // so used same logic from App changeBookShelf
-  changeSearchShelf = (changedBook) => {
-    let newList = [];
-    this.state.books.filter((book) => book.id === changedBook.id).length
-      ? (newList = this.state.books.map((book) =>
-          book.id === changedBook.id ? changedBook : book
-        ))
-      : (newList = [...this.state.books, changedBook]);
-    this.setState({
-      books: newList,
-    });
-  };
+  // --------------------- No longer nedeed VERY BUGGY ---------------//
+  // // Tried to do it with props from App.js but didn't work
+  // // so used same logic from App changeBookShelf
+  // changeSearchShelf = (changedBook) => {
+  //   let newList = [];
+  //   this.state.books.filter((book) => book.id === changedBook.id).length
+  //     ? (newList = this.state.books.map((book) =>
+  //         book.id === changedBook.id ? changedBook : book
+  //       ))
+  //     : (newList = [...this.state.books, changedBook]);
+  //   this.setState({
+  //     books: newList,
+  //   });
+  // };
 
   // Called whenever the search query change to sync books from App with search results
   syncBooks = (myBooks, apiBooks) => {

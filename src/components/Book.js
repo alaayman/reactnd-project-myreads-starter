@@ -11,18 +11,22 @@ export default class Book extends Component {
   // calling the changeShelf prop from App.js
   handleShelfChange = (e) => {
     // console.log("started change in book");
-    let changedBook = this.state.book;
+    const shelfValue = e.target.value;
+    const changedBook = this.state.book;
     changedBook.shelf = e.target.value;
-    this.setState({
-      book: changedBook,
-    });
-    this.props.changeShelf(this.state.book, e.target.value);
-    // console.log("after calling app from book change shelf");
-    // this.props.changSearchShelf(this.state.book);
+    // finally found a way calling changeShelf from the callback of setState did it
+    this.setState(
+      {
+        book: changedBook,
+      },
+      () => {
+        this.props.changeShelf(this.state.book, shelfValue);
+      }
+    );
   };
 
   render() {
-    const { book } = this.props;
+    const { book } = this.state;
     return (
       <div className="book">
         <div className="book-top">
