@@ -14,13 +14,12 @@ export default class SearchBooks extends Component {
 
   changeQuery = (query) => {
     this.setState({ query: query });
-
+    // Checking for error or null query
     BooksAPI.search(query)
       .then((apiBooks) => {
         if (!query || apiBooks.error) {
           this.setState({ books: [] });
         } else {
-          // this.setState({ books: apiBooks });
           this.syncBooks(this.props.myBooks, apiBooks);
         }
       })
@@ -30,6 +29,8 @@ export default class SearchBooks extends Component {
       });
   };
 
+  // Tried to do it with props from App.js but didn't work
+  // so used same logic from App changeBookShelf
   changeSearchShelf = (changedBook) => {
     let newList = [];
     this.state.books.filter((book) => book.id === changedBook.id).length
@@ -42,6 +43,7 @@ export default class SearchBooks extends Component {
     });
   };
 
+  // Called whenever the search query change to sync books from App with search results
   syncBooks = (myBooks, apiBooks) => {
     console.log("api", apiBooks);
     let newBooks = [];

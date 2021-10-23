@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Book from "./Book";
 
+// Populate the shelfs with filtering books
 export default class Shelf extends Component {
   render() {
     const { books, shelf, changeShelf } = this.props;
