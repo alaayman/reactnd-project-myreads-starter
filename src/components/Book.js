@@ -8,6 +8,7 @@ export default class Book extends Component {
     };
   }
 
+  // calling the changeShelf prop from App.js
   handleShelfChange = (e) => {
     // console.log("started change in book");
     let changedBook = this.state.book;

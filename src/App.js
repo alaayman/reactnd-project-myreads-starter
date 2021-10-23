@@ -10,15 +10,19 @@ class BooksApp extends React.Component {
     books: [],
   };
 
+  // getting data from api and setting the state
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState(() => ({ books: books }));
     });
   }
 
+  // Had a lot of trouble with that one tried different approaches until succeeding
+  // taking the call from Book and replacing the (changed book with shelf added) to Books state
   changeBookShelf = (changedBook, shelf) => {
     let newList = [];
-    console.log("start app change shelf");
+    // Find if the book exist if so map books and replace changed book
+    // If the book dont exist just add it to books
     this.state.books.filter((book) => book.id === changedBook.id).length
       ? (newList = this.state.books.map((book) =>
           book.id === changedBook.id ? changedBook : book
@@ -36,6 +40,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route
+          exact
           path="/search"
           render={() => (
             <SearchBooks
